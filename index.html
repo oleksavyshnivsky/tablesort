@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Example</title>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="sha256-hHKA3d/HttC8OW3Sl093W8DoZudhHJDj++kZYo6MLzA=" crossorigin="anonymous">
+	<style>
+[data-sort]:hover {
+	cursor: pointer;
+}
+
+[data-dir="asc"]:after {
+	content: ' ↗';
+}
+
+[data-dir="desc"]:after {
+	content: ' ↘';
+}
+	</style>
+</head>
+<body class="container">
+	<h1>Example</h1>
+	<table class="table table-sm table-striped table-sortable" style="table-layout: fixed;">
+		<thead>
+			<tr>
+				<th data-sort="string">String</th>
+				<th data-sort="int">Int</th>
+				<th data-sort="float">Float</th>
+				<th data-sort="date">Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>A</td>
+				<td>5</td>
+				<td>2.3</td>
+				<td>2021-06-22</td>
+			</tr>
+			<tr>
+				<td>B</td>
+				<td>3</td>
+				<td>3.2</td>
+				<td>2021-06-21</td>
+			</tr>
+			<tr>
+				<td>E</td>
+				<td>4</td>
+				<td>6.4</td>
+				<td>2021-06-23</td>
+			</tr>
+			<tr>
+				<td>D</td>
+				<td>1</td>
+				<td>7.5</td>
+				<td>2021-06-20</td>
+			</tr>
+			<tr>
+				<td>C</td>
+				<td>2</td>
+				<td>2.411</td>
+				<td>2021-06-24</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>HTML</h2>
+	<pre class="alert alert-info">
+&lt;table class="table-sortable">
+	&lt;thead>
+		&lt;tr>
+			&lt;th data-sort="string">String&lt;/th>
+			&lt;th data-sort="int">Int&lt;/th>
+			&lt;th data-sort="float">Float&lt;/th>
+			&lt;th data-sort="date">Date&lt;/th>
+		&lt;/tr>
+	&lt;/thead>
+	&lt;tbody>
+		...
+		... (rest of the table)
+	</pre>
+	<h2>JS</h2>
+	<pre class="alert alert-info">
+&lt;script src="tablesort.min.js">&lt;/script>
+// One table
+&lt;script>document.querySelector('.table-sortable').tsortable()&lt;/script>
+// More than one table
+// &lt;script>document.querySelectorAll('.table-sortable').forEach(el => el.tsortable())&lt;/script>
+	</pre>
+	<h2>Optional CSS</h2>
+	<pre class="alert alert-info">
+[data-sort]:hover {
+	cursor: pointer;
+}
+
+[data-dir="asc"]:after {
+	content: ' ↗';
+}
+
+[data-dir="desc"]:after {
+	content: ' ↘';
+}
+	</pre>
+	
+
+<script src="tablesort.min.js"></script>
+<script>document.querySelector('.table-sortable').tsortable()</script>
+<!-- <script>document.querySelectorAll('.table-sortable').forEach(el => el.tsortable())</script> -->
+
+</body>
+</html>
