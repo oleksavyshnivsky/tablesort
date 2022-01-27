@@ -1,12 +1,16 @@
-// ————————————————————————————————————————————————————————————————————————————————
-// Made by Oleksa Vyshnivsky <
-//	in trying to replace https://joequery.github.io/Stupid-Table-Plugin/ on jQuery-less website
-//	
-//	No defence against complicated THEADs or very large tables
-//	
-// 	dir: asc | desc
-//	datatype: string | int | float | date
-// ————————————————————————————————————————————————————————————————————————————————
+/**
+ * @file Trying to replace https://joequery.github.io/Stupid-Table-Plugin/ on jQuery-less website
+ * @copyleft Oleksa Vyshnivsky <dying.escape@gmail.com> 2022
+ * @license GPL-3.0-or-later
+ * */
+
+/**
+ * No defence against any table structure complications or very large tables
+ *	
+ * 	dir: asc | desc
+ *	datatype: string | int | float | date
+ *
+ * */
 
 Node.prototype.tsortable = function() {
 	var ths = this.querySelectorAll('thead tr:last-child th[data-sort]')
@@ -19,7 +23,7 @@ function tablesort(e) {
 	var J = Array.from(e.currentTarget.parentNode.children).indexOf(e.currentTarget)
 	// Data type
 	var datatype = e.currentTarget.dataset.sort
-	// Delete sort direction from the column of previous sorting 
+	// Delete sort direction from the column of previous sorting
 	var olderTH = table.querySelector('th[data-dir]')
 	if (olderTH && olderTH !== e.currentTarget) delete olderTH.dataset.dir
 	// Sorting direction
@@ -29,6 +33,7 @@ function tablesort(e) {
 	// Inner table for sorting
 	var itable = []
 
+	// Data to be sorted
 	var trs = table.querySelectorAll('tbody tr')
 	trs.forEach((tr, i) => {
 		itable.push({tr: tr, values: []})
@@ -43,16 +48,28 @@ function tablesort(e) {
 	})
 
 	// Inner sorting
-	if (dir === 'asc') {
-		itable.sort((a, b) => {
-			return a.values[J] < b.values[J] ? -1 : (a.values[J] > b.values[J] ? 1 : 0)
-		})
+	if (datatype === 'string') {
+		if (dir === 'asc') {
+			itable.sort((a, b) => {
+				return ('' + a.values[J]).localeCompare(b.values[J])
+			})
+		} else {
+			itable.sort((a, b) => {
+				return -('' + a.values[J]).localeCompare(b.values[J])
+			})
+		}
 	} else {
-		itable.sort((a, b) => {
-			return a.values[J] < b.values[J] ? 1 : (a.values[J] > b.values[J] ? -1 : 0)
-		})
+		if (dir === 'asc') {
+			itable.sort((a, b) => {
+				return a.values[J] < b.values[J] ? -1 : (a.values[J] > b.values[J] ? 1 : 0)
+			})
+		} else {
+			itable.sort((a, b) => {
+				return a.values[J] < b.values[J] ? 1 : (a.values[J] > b.values[J] ? -1 : 0)
+			})
+		}		
 	}
-
+	
 	// Redrawing
 	table.querySelector('tbody').innerHTML = ''
 	itable.forEach(row => table.querySelector('tbody').append(row.tr))
