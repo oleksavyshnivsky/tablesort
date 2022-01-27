@@ -1,7 +1,7 @@
 /**
  * @file Trying to replace https://joequery.github.io/Stupid-Table-Plugin/ on jQuery-less website
  * @copyleft Oleksa Vyshnivsky <dying.escape@gmail.com> 2022
- * @license GPL-3.0-or-later
+ * @license ISC
  * */
 
 /**

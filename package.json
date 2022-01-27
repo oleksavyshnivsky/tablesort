@@ -1,0 +1,28 @@
+{
+  "name": "the-basicest-tablesort",
+  "version": "1.0.0",
+  "description": "Created in trying to replace https://joequery.github.io/Stupid-Table-Plugin/ on jQuery-less website",
+  "main": "tablesort.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oleksavyshnivsky/tablesort.git"
+  },
+  "keywords": [
+    "table",
+    "sort",
+    "tablesort",
+    "javascript",
+    "nojquery"
+  ],
+  "author": "Oleksa Vyshnivsky <dying.escape@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oleksavyshnivsky/tablesort/issues"
+  },
+  "homepage": "https://github.com/oleksavyshnivsky/tablesort#readme"
+}
