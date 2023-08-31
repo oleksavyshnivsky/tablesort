@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="dark">
 <head>
 	<meta charset="utf-8">
 	<title>Example</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="color-scheme" content="light dark">
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" integrity="sha256-hHKA3d/HttC8OW3Sl093W8DoZudhHJDj++kZYo6MLzA=" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
 	<style>
 [data-sort]:hover {
 	cursor: pointer;
@@ -20,12 +23,12 @@
 	</style>
 </head>
 <body class="container">
-	<h1>Example</h1>
+	<h1>Example 1</h1>
 	<table class="table table-sm table-striped table-sortable" style="table-layout: fixed;">
 		<thead>
 			<tr>
 				<th data-sort="string">String</th>
-				<th data-sort="string">String (UA)</th>
+				<th data-sort="string">Ukrainian string</th>
 				<th data-sort="int">Int</th>
 				<th data-sort="float">Float</th>
 				<th data-sort="date">Date</th>
@@ -33,44 +36,51 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>A</td>
+				<th>A</th>
 				<td>Авто</td>
 				<td>5</td>
 				<td>2.3</td>
 				<td>2021-06-22</td>
 			</tr>
 			<tr>
-				<td>B</td>
+				<th>B</th>
 				<td>крок</td>
 				<td>3</td>
-				<td>3.2</td>
+				<td></td>
 				<td>2021-06-21</td>
 			</tr>
 			<tr>
-				<td>E</td>
+				<th>E</th>
 				<td>Європа</td>
-				<td>4</td>
-				<td>6.4</td>
+				<td></td>
+				<td>11.4</td>
 				<td>2021-06-23</td>
 			</tr>
 			<tr>
-				<td>d</td>
+				<th></th>
 				<td>Індія</td>
-				<td>1</td>
+				<td>4</td>
 				<td>7.5</td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>d</th>
+				<td></td>
+				<td>1</td>
+				<td>2.411</td>
 				<td>2021-06-20</td>
 			</tr>
 			<tr>
-				<td>C</td>
+				<th>C</th>
 				<td>Шепіт</td>
 				<td>2</td>
-				<td>2.411</td>
+				<td>2.34 (extra text)</td>
 				<td>2021-06-24</td>
 			</tr>
 		</tbody>
 	</table>
 
-	<h2>HTML</h2>
+	<h3>HTML</h3>
 	<pre class="alert alert-info">
 &lt;table class="table-sortable">
 	&lt;thead>
@@ -86,7 +96,7 @@
 		...
 		... (rest of the table)
 	</pre>
-	<h2>JS</h2>
+	<h3>JS</h3>
 	<pre class="alert alert-info">
 &lt;script src="tablesort.min.js">&lt;/script>
 // One table
@@ -94,7 +104,7 @@
 // More than one table
 // &lt;script>document.querySelectorAll('.table-sortable').forEach(el => el.tsortable())&lt;/script>
 	</pre>
-	<h2>Optional CSS</h2>
+	<h3>Optional CSS</h3>
 	<pre class="alert alert-info">
 [data-sort]:hover {
 	cursor: pointer;
@@ -108,11 +118,61 @@
 	content: ' ↘';
 }
 	</pre>
+
+
+	<h1 class="mt-5">Example 2</h1>
+	<table class="table table-sm table-striped table-bordered table-sortable text-center" style="table-layout: fixed;">
+		<thead>
+			<tr>
+				<th data-sort="int" rowspan="2">data-sort-col="0" (auto)</th>
+				<th data-sort="int" colspan="2">data-sort-col="2" (auto)</th>
+			</tr>
+			<tr>
+				<th data-sort="int" data-sort-col="1">data-sort-col="1"</th>
+				<th data-sort="int" data-sort-col="2">data-sort-col="2"</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>22</td>
+				<td>333</td>
+			</tr>
+			<tr>
+				<td>11</td>
+				<td>222</td>
+				<td>3</td>
+			</tr>
+			<tr>
+				<td>111</td>
+				<td>2</td>
+				<td>33</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h3>HTML</h3>
+	<pre class="alert alert-info">
+&lt;table class="table-sortable">
+	&lt;thead>
+		&lt;tr&gt;
+			&lt;th data-sort="int" rowspan="2"&gt;data-sort-col="0" (auto)&lt;/th&gt;
+			&lt;th data-sort="int" colspan="2"&gt;data-sort-col="2" (auto)&lt;/th&gt;
+		&lt;/tr&gt;
+		&lt;tr&gt;
+			&lt;th data-sort="int" data-sort-col="1"&gt;data-sort-col="1"&lt;/th&gt;
+			&lt;th data-sort="int" data-sort-col="2"&gt;data-sort-col="2"&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead>
+	&lt;tbody>
+		...
+		... (rest of the table)
+	</pre>
 	
 
-<script src="tablesort.min.js"></script>
-<script>document.querySelector('.table-sortable').tsortable()</script>
-<!-- <script>document.querySelectorAll('.table-sortable').forEach(el => el.tsortable())</script> -->
+<script src="tablesort.min.js?v=20230831"></script>
+<!-- <script>document.querySelector('.table-sortable').tsortable()</script> -->
+<script>document.querySelectorAll('.table-sortable').forEach(el => el.tsortable())</script>
 
 </body>
 </html>
