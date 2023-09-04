@@ -8,9 +8,9 @@
  * If the table header contains merged cells, `data-sort-col` attribute might be needed
  * to specify the correct column index (first column's index is 0)
  *	
- * `data-sort-` attributes:
- * 	dir: asc | desc
- *	datatype: string | int | float | date
+ * Available settings:
+ *	data-sort (defines datatype): string | int | float | date
+ * 	data-sort-dir (defined direction, optional): asc (default) | desc
  * 
  * Wrong number/date values are treated as empty values. 
  * Empty values are first at ascending sorting and last at desc.
@@ -42,12 +42,28 @@ function getCellIndex(cell) {
 	return columnIndex - 1
 }
 
+// ————————————————————————————————————————————————————————————————————————————————
+// 
+// ————————————————————————————————————————————————————————————————————————————————
+let is_sorting_process_on = false
+let delay = 100 // ms
+
+// ————————————————————————————————————————————————————————————————————————————————
+// 
+// ————————————————————————————————————————————————————————————————————————————————
 Node.prototype.tsortable = function() {
 	var ths = this.querySelectorAll('thead th[data-sort], thead td[data-sort]')
 	ths.forEach(th => th.onclick = tablesort)
 }
 
+// ————————————————————————————————————————————————————————————————————————————————
+// 
+// ————————————————————————————————————————————————————————————————————————————————
 function tablesort(e) {
+	if (is_sorting_process_on) return false
+	is_sorting_process_on = true
+
+	// ~~~~~~~~~~~~~~~~~~~~
 	var table = e.currentTarget.closest('table')
 	// Column for sorting
 	// var J = Array.from(e.currentTarget.parentNode.children).indexOf(e.currentTarget)
@@ -66,17 +82,21 @@ function tablesort(e) {
 
 	// Data to be sorted
 	var trs = table.querySelectorAll('tbody tr')
-	trs.forEach((tr, i) => {
+	let tr, td, tds, value, itab
+	for (j = 0, jj = trs.length; j < jj; j++) {
+		tr = trs[j]
 		itable.push({tr: tr, values: []})
-		var tds = tr.querySelectorAll('th,td')
-		tds.forEach(td => {
-			var value = td.dataset.sortValue ? td.dataset.sortValue : td.innerText
+		itab = itable[j]
+		tds = tr.querySelectorAll('th, td')
+		for (i = 0, ii = tds.length; i < ii; i++) {
+			td = tds[i]
+			value = td.dataset.sortValue ? td.dataset.sortValue : td.innerText
 			if (datatype === 'int') value = parseInt(value) 
 			else if (datatype === 'float') value = parseFloat(value)
 			else if (datatype === 'date') value = new Date(value)
-			itable[i].values.push(value)
-		})
-	})
+			itab.values.push(value)
+		}
+	}
 
 	// Inner sorting
 	if (datatype === 'string') {
@@ -121,4 +141,8 @@ function tablesort(e) {
 	const fragment = document.createDocumentFragment()
 	itable.forEach(row => fragment.appendChild(row.tr))
 	table.querySelector('tbody').replaceChildren(fragment)
+
+	// ~~~~~~~~~~~~~~~~~~~~
+	setTimeout(() => is_sorting_process_on = false, delay)
+	return true
 }
